@@ -48,7 +48,7 @@ public class view : MonoBehaviour
 
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i].transform.gameObject.CompareTag("roof") )
+            if (hits[i].transform.gameObject.CompareTag("roof"))
                 roofs[i].ViewRoof();
 
         }
