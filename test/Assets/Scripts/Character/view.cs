@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class view : MonoBehaviour
 {
@@ -7,9 +7,10 @@ public class view : MonoBehaviour
     private ChangeView roof;
     [SerializeField]private ChangeView[] roofs;
     
+    
     private void Start()
     {
-        roofs = new ChangeView[3];
+        roofs = new ChangeView[4];
     }
 
     private void Update()
@@ -34,24 +35,38 @@ public class view : MonoBehaviour
         }*/
         
         //Nightmare  // 
+
         
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, Vector3.up, distance, collider);
+        
+         RaycastHit[] hits;
+         hits = Physics.RaycastAll(transform.position, Vector3.up, distance, collider);
 
-        for (int i = 0; i < hits.Length; i++)
+        
+        
+            for (int i = 0; i < hits.Length; i++)
+            {
+                roofs[i] = hits[i].transform.gameObject.GetComponent<ChangeView>();
+                roofs[i].HideRoof();
+            }
+
+        
+       
+        if(hits.Length == 0)
         {
-            roofs[i]= hits[i].transform.gameObject.GetComponent<ChangeView>();
-            roofs[i].HideRoof();
+            for (int i = 0; i < roofs.Length; i++)
+                if(roofs[i]!= null)
+                    roofs[i].ViewRoof();
         }
+           
+            
+
+
+        
+        
 
 
 
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if (hits[i].transform.gameObject.CompareTag("roof"))
-                roofs[i].ViewRoof();
-
-        }
+        
            
             
         // tema de rendimientno hacer getcomponet en update 
